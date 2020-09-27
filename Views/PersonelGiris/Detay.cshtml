@@ -1,0 +1,18 @@
+﻿@model Personel.Models.Entity.tbl_personel
+
+<h3 class="col-sm-3">Personel Bilgileri</h3>
+<h3>@Html.DisplayTextFor(p => p.personel_kodu) - @Html.DisplayFor(p => p.personel_adi) @Html.DisplayFor(p => p.personel_soyadi)</h3>
+<br />
+<br />
+@using (Html.BeginForm("PersonelGuncelle", "PersonelGiris", FormMethod.Post))
+{
+    <div class="form-inline">
+
+      
+    </div>
+}
+<br />
+<div class="col-sm-2" style="margin-top:10px;">
+    <button class="btn btn-success" style="width:100px;">Güncelle</button>
+</div>
+

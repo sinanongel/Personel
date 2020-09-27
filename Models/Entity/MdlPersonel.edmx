@@ -1,0 +1,1181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_personelModel.Store" Provider="Npgsql" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_bolgeler">
+          <Key>
+            <PropertyRef Name="bolge_id" />
+          </Key>
+          <Property Name="bolge_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bolge_adi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="firma_id" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_calisma_yeri">
+          <Key>
+            <PropertyRef Name="calisma_id" />
+          </Key>
+          <Property Name="calisma_id" Type="int4" Nullable="false" />
+          <Property Name="calisma_yeri_adi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bolge_id" Type="int4" Nullable="false" />
+          <Property Name="firma_id" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_degerlendirme">
+          <Key>
+            <PropertyRef Name="degerlendirme_id" />
+          </Key>
+          <Property Name="degerlendirme_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="donem" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="personel_id" Type="int4" Nullable="false" />
+          <Property Name="gorev_id" Type="int4" Nullable="false" />
+          <Property Name="puan" Type="int4" Nullable="false" />
+          <Property Name="bolge_id" Type="int4" Nullable="false" />
+          <Property Name="firma_id" Type="int4" Nullable="false" />
+          <Property Name="aciklama" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_firmalar">
+          <Key>
+            <PropertyRef Name="firma_id" />
+          </Key>
+          <Property Name="firma_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firma_unvani" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="firma_adi" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_gorevler">
+          <Key>
+            <PropertyRef Name="gorev_id" />
+          </Key>
+          <Property Name="gorev_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gorev_adi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bolge_id" Type="int4" Nullable="false" />
+          <Property Name="firma_id" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_izin_turu">
+          <Key>
+            <PropertyRef Name="izin_tur_id" />
+          </Key>
+          <Property Name="izin_tur_id" Type="int4" Nullable="false" />
+          <Property Name="izin_tur_adi" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_izinler">
+          <Key>
+            <PropertyRef Name="izin_id" />
+          </Key>
+          <Property Name="izin_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="personel_id" Type="int4" Nullable="false" />
+          <Property Name="izin_baslama_tarihi" Type="date" Nullable="false" />
+          <Property Name="izin_bitis_tarihi" Type="date" Nullable="false" />
+          <Property Name="mazeret_id" Type="int4" />
+          <Property Name="kullanilan_yillik_izin" Type="int4" />
+          <Property Name="tahakkuk_eden_yillik_izin" Type="int4" />
+          <Property Name="kalan_yillik_izin" Type="int4" />
+          <Property Name="kullanilan_mazeret_izin" Type="int4" />
+          <Property Name="calisilan_sure" Type="int4" />
+          <Property Name="izin_tur_id" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_kullanici">
+          <Key>
+            <PropertyRef Name="kullanici_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanici_adi" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="adi" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="soyadi" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="sifre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="mail" Type="varchar" MaxLength="50" />
+          <Property Name="firma_id" Type="int4" />
+          <Property Name="yetki_grubu" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tbl_mazeret_turu">
+          <Key>
+            <PropertyRef Name="mazeret_id" />
+          </Key>
+          <Property Name="mazeret_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mazeret_tur_adi" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_ozluk_belgeler">
+          <Key>
+            <PropertyRef Name="belge_id" />
+          </Key>
+          <Property Name="belge_id" Type="int4" Nullable="false" />
+          <Property Name="belge_adi" Type="varchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_personel">
+          <Key>
+            <PropertyRef Name="personel_id" />
+          </Key>
+          <Property Name="personel_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="personel_kodu" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="personel_adi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="personel_soyadi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sgk_kayit_yeri_id" Type="int4" />
+          <Property Name="ise_giris_tarihi" Type="date" Nullable="false" />
+          <Property Name="isten_cikis_tarihi" Type="date" />
+          <Property Name="firma_id" Type="int4" />
+          <Property Name="durum" Type="varchar" MaxLength="5" />
+          <Property Name="cinsiyet" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="tbl_personel_ozluk">
+          <Key>
+            <PropertyRef Name="ozluk_id" />
+          </Key>
+          <Property Name="ozluk_id" Type="int4" Nullable="false" />
+          <Property Name="personel_id" Type="int4" Nullable="false" />
+          <Property Name="durum" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="dosya_yolu" Type="varchar" MaxLength="200" />
+          <Property Name="dosya_adi" Type="varchar" MaxLength="150" />
+          <Property Name="belge_id" Type="int4" />
+        </EntityType>
+        <EntityType Name="tbl_resmi_tatil">
+          <Key>
+            <PropertyRef Name="rt_id" />
+          </Key>
+          <Property Name="rt_id" Type="int4" Nullable="false" />
+          <Property Name="tarih" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_sgk_kayit_hareketleri">
+          <Key>
+            <PropertyRef Name="sgk_hareket_id" />
+          </Key>
+          <Property Name="sgk_hareket_id" Type="int4" Nullable="false" />
+          <Property Name="personel_id" Type="int4" Nullable="false" />
+          <Property Name="sgk_kayit_yeri_id" Type="int4" Nullable="false" />
+          <Property Name="giris_tarihi" Type="date" Nullable="false" />
+          <Property Name="cikis_tarihi" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_sgk_kayit_yeri">
+          <Key>
+            <PropertyRef Name="sgk_kayit_yeri_id" />
+          </Key>
+          <Property Name="sgk_kayit_yeri_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sgk_kayit_yeri_adi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="firma_id" Type="int4" Nullable="false" />
+        </EntityType>
+        <Association Name="bolgeler_fkey">
+          <End Role="tbl_bolgeler" Type="Self.tbl_bolgeler" Multiplicity="1" />
+          <End Role="tbl_gorevler" Type="Self.tbl_gorevler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_bolgeler">
+              <PropertyRef Name="bolge_id" />
+            </Principal>
+            <Dependent Role="tbl_gorevler">
+              <PropertyRef Name="bolge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bolgeler_fkey1">
+          <End Role="tbl_bolgeler" Type="Self.tbl_bolgeler" Multiplicity="1" />
+          <End Role="tbl_degerlendirme" Type="Self.tbl_degerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_bolgeler">
+              <PropertyRef Name="bolge_id" />
+            </Principal>
+            <Dependent Role="tbl_degerlendirme">
+              <PropertyRef Name="bolge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bolgeler_fkey2">
+          <End Role="tbl_bolgeler" Type="Self.tbl_bolgeler" Multiplicity="1" />
+          <End Role="tbl_calisma_yeri" Type="Self.tbl_calisma_yeri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_bolgeler">
+              <PropertyRef Name="bolge_id" />
+            </Principal>
+            <Dependent Role="tbl_calisma_yeri">
+              <PropertyRef Name="bolge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="1" />
+          <End Role="tbl_bolgeler" Type="Self.tbl_bolgeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_bolgeler">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey1">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="1" />
+          <End Role="tbl_gorevler" Type="Self.tbl_gorevler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_gorevler">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey2">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="1" />
+          <End Role="tbl_sgk_kayit_yeri" Type="Self.tbl_sgk_kayit_yeri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_sgk_kayit_yeri">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey3">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="0..1" />
+          <End Role="tbl_personel" Type="Self.tbl_personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_personel">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey4">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="0..1" />
+          <End Role="tbl_kullanici" Type="Self.tbl_kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_kullanici">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey5">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="1" />
+          <End Role="tbl_degerlendirme" Type="Self.tbl_degerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_degerlendirme">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey6">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="1" />
+          <End Role="tbl_calisma_yeri" Type="Self.tbl_calisma_yeri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_calisma_yeri">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gorevler_fkey">
+          <End Role="tbl_gorevler" Type="Self.tbl_gorevler" Multiplicity="1" />
+          <End Role="tbl_degerlendirme" Type="Self.tbl_degerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_gorevler">
+              <PropertyRef Name="gorev_id" />
+            </Principal>
+            <Dependent Role="tbl_degerlendirme">
+              <PropertyRef Name="gorev_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="izin_turu_fkey">
+          <End Role="tbl_izin_turu" Type="Self.tbl_izin_turu" Multiplicity="1" />
+          <End Role="tbl_izinler" Type="Self.tbl_izinler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_izin_turu">
+              <PropertyRef Name="izin_tur_id" />
+            </Principal>
+            <Dependent Role="tbl_izinler">
+              <PropertyRef Name="izin_tur_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="mazeret_turu_fkey">
+          <End Role="tbl_mazeret_turu" Type="Self.tbl_mazeret_turu" Multiplicity="0..1" />
+          <End Role="tbl_izinler" Type="Self.tbl_izinler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mazeret_turu">
+              <PropertyRef Name="mazeret_id" />
+            </Principal>
+            <Dependent Role="tbl_izinler">
+              <PropertyRef Name="mazeret_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ozluk_belgeler_fkey">
+          <End Role="tbl_ozluk_belgeler" Type="Self.tbl_ozluk_belgeler" Multiplicity="0..1" />
+          <End Role="tbl_personel_ozluk" Type="Self.tbl_personel_ozluk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ozluk_belgeler">
+              <PropertyRef Name="belge_id" />
+            </Principal>
+            <Dependent Role="tbl_personel_ozluk">
+              <PropertyRef Name="belge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personel_fkey">
+          <End Role="tbl_personel" Type="Self.tbl_personel" Multiplicity="1" />
+          <End Role="tbl_degerlendirme" Type="Self.tbl_degerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="tbl_degerlendirme">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personel_fkey1">
+          <End Role="tbl_personel" Type="Self.tbl_personel" Multiplicity="1" />
+          <End Role="tbl_izinler" Type="Self.tbl_izinler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="tbl_izinler">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personel_fkey2">
+          <End Role="tbl_personel" Type="Self.tbl_personel" Multiplicity="1" />
+          <End Role="tbl_sgk_kayit_hareketleri" Type="Self.tbl_sgk_kayit_hareketleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="tbl_sgk_kayit_hareketleri">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personel_fkey3">
+          <End Role="tbl_personel" Type="Self.tbl_personel" Multiplicity="1" />
+          <End Role="tbl_personel_ozluk" Type="Self.tbl_personel_ozluk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="tbl_personel_ozluk">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sgk_kayit_yeri_fkey">
+          <End Role="tbl_sgk_kayit_yeri" Type="Self.tbl_sgk_kayit_yeri" Multiplicity="1" />
+          <End Role="tbl_sgk_kayit_hareketleri" Type="Self.tbl_sgk_kayit_hareketleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_sgk_kayit_yeri">
+              <PropertyRef Name="sgk_kayit_yeri_id" />
+            </Principal>
+            <Dependent Role="tbl_sgk_kayit_hareketleri">
+              <PropertyRef Name="sgk_kayit_yeri_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_personelModelStoreContainer">
+          <EntitySet Name="tbl_bolgeler" EntityType="Self.tbl_bolgeler" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_calisma_yeri" EntityType="Self.tbl_calisma_yeri" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_degerlendirme" EntityType="Self.tbl_degerlendirme" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_firmalar" EntityType="Self.tbl_firmalar" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_gorevler" EntityType="Self.tbl_gorevler" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_izin_turu" EntityType="Self.tbl_izin_turu" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_izinler" EntityType="Self.tbl_izinler" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_kullanici" EntityType="Self.tbl_kullanici" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_mazeret_turu" EntityType="Self.tbl_mazeret_turu" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_ozluk_belgeler" EntityType="Self.tbl_ozluk_belgeler" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_personel" EntityType="Self.tbl_personel" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_personel_ozluk" EntityType="Self.tbl_personel_ozluk" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_resmi_tatil" EntityType="Self.tbl_resmi_tatil" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_sgk_kayit_hareketleri" EntityType="Self.tbl_sgk_kayit_hareketleri" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tbl_sgk_kayit_yeri" EntityType="Self.tbl_sgk_kayit_yeri" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="bolgeler_fkey" Association="Self.bolgeler_fkey">
+            <End Role="tbl_bolgeler" EntitySet="tbl_bolgeler" />
+            <End Role="tbl_gorevler" EntitySet="tbl_gorevler" />
+          </AssociationSet>
+          <AssociationSet Name="bolgeler_fkey1" Association="Self.bolgeler_fkey1">
+            <End Role="tbl_bolgeler" EntitySet="tbl_bolgeler" />
+            <End Role="tbl_degerlendirme" EntitySet="tbl_degerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="bolgeler_fkey2" Association="Self.bolgeler_fkey2">
+            <End Role="tbl_bolgeler" EntitySet="tbl_bolgeler" />
+            <End Role="tbl_calisma_yeri" EntitySet="tbl_calisma_yeri" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey" Association="Self.firmalar_fkey">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_bolgeler" EntitySet="tbl_bolgeler" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey1" Association="Self.firmalar_fkey1">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_gorevler" EntitySet="tbl_gorevler" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey2" Association="Self.firmalar_fkey2">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_sgk_kayit_yeri" EntitySet="tbl_sgk_kayit_yeri" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey3" Association="Self.firmalar_fkey3">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_personel" EntitySet="tbl_personel" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey4" Association="Self.firmalar_fkey4">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_kullanici" EntitySet="tbl_kullanici" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey5" Association="Self.firmalar_fkey5">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_degerlendirme" EntitySet="tbl_degerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey6" Association="Self.firmalar_fkey6">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_calisma_yeri" EntitySet="tbl_calisma_yeri" />
+          </AssociationSet>
+          <AssociationSet Name="gorevler_fkey" Association="Self.gorevler_fkey">
+            <End Role="tbl_gorevler" EntitySet="tbl_gorevler" />
+            <End Role="tbl_degerlendirme" EntitySet="tbl_degerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="izin_turu_fkey" Association="Self.izin_turu_fkey">
+            <End Role="tbl_izin_turu" EntitySet="tbl_izin_turu" />
+            <End Role="tbl_izinler" EntitySet="tbl_izinler" />
+          </AssociationSet>
+          <AssociationSet Name="mazeret_turu_fkey" Association="Self.mazeret_turu_fkey">
+            <End Role="tbl_mazeret_turu" EntitySet="tbl_mazeret_turu" />
+            <End Role="tbl_izinler" EntitySet="tbl_izinler" />
+          </AssociationSet>
+          <AssociationSet Name="ozluk_belgeler_fkey" Association="Self.ozluk_belgeler_fkey">
+            <End Role="tbl_ozluk_belgeler" EntitySet="tbl_ozluk_belgeler" />
+            <End Role="tbl_personel_ozluk" EntitySet="tbl_personel_ozluk" />
+          </AssociationSet>
+          <AssociationSet Name="personel_fkey" Association="Self.personel_fkey">
+            <End Role="tbl_personel" EntitySet="tbl_personel" />
+            <End Role="tbl_degerlendirme" EntitySet="tbl_degerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="personel_fkey1" Association="Self.personel_fkey1">
+            <End Role="tbl_personel" EntitySet="tbl_personel" />
+            <End Role="tbl_izinler" EntitySet="tbl_izinler" />
+          </AssociationSet>
+          <AssociationSet Name="personel_fkey2" Association="Self.personel_fkey2">
+            <End Role="tbl_personel" EntitySet="tbl_personel" />
+            <End Role="tbl_sgk_kayit_hareketleri" EntitySet="tbl_sgk_kayit_hareketleri" />
+          </AssociationSet>
+          <AssociationSet Name="personel_fkey3" Association="Self.personel_fkey3">
+            <End Role="tbl_personel" EntitySet="tbl_personel" />
+            <End Role="tbl_personel_ozluk" EntitySet="tbl_personel_ozluk" />
+          </AssociationSet>
+          <AssociationSet Name="sgk_kayit_yeri_fkey" Association="Self.sgk_kayit_yeri_fkey">
+            <End Role="tbl_sgk_kayit_yeri" EntitySet="tbl_sgk_kayit_yeri" />
+            <End Role="tbl_sgk_kayit_hareketleri" EntitySet="tbl_sgk_kayit_hareketleri" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_personelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_bolgeler">
+          <Key>
+            <PropertyRef Name="bolge_id" />
+          </Key>
+          <Property Name="bolge_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bolge_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firma_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_gorevler" Relationship="Self.bolgeler_fkey" FromRole="tbl_bolgeler" ToRole="tbl_gorevler" />
+          <NavigationProperty Name="tbl_degerlendirme" Relationship="Self.bolgeler_fkey1" FromRole="tbl_bolgeler" ToRole="tbl_degerlendirme" />
+          <NavigationProperty Name="tbl_calisma_yeri" Relationship="Self.bolgeler_fkey2" FromRole="tbl_bolgeler" ToRole="tbl_calisma_yeri" />
+          <NavigationProperty Name="tbl_firmalar" Relationship="Self.firmalar_fkey" FromRole="tbl_bolgeler" ToRole="tbl_firmalar" />
+        </EntityType>
+        <EntityType Name="tbl_calisma_yeri">
+          <Key>
+            <PropertyRef Name="calisma_id" />
+          </Key>
+          <Property Name="calisma_id" Type="Int32" Nullable="false" />
+          <Property Name="calisma_yeri_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bolge_id" Type="Int32" Nullable="false" />
+          <Property Name="firma_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_bolgeler" Relationship="Self.bolgeler_fkey2" FromRole="tbl_calisma_yeri" ToRole="tbl_bolgeler" />
+          <NavigationProperty Name="tbl_firmalar" Relationship="Self.firmalar_fkey6" FromRole="tbl_calisma_yeri" ToRole="tbl_firmalar" />
+        </EntityType>
+        <EntityType Name="tbl_degerlendirme">
+          <Key>
+            <PropertyRef Name="degerlendirme_id" />
+          </Key>
+          <Property Name="degerlendirme_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="donem" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="personel_id" Type="Int32" Nullable="false" />
+          <Property Name="gorev_id" Type="Int32" Nullable="false" />
+          <Property Name="puan" Type="Int32" Nullable="false" />
+          <Property Name="bolge_id" Type="Int32" Nullable="false" />
+          <Property Name="firma_id" Type="Int32" Nullable="false" />
+          <Property Name="aciklama" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_bolgeler" Relationship="Self.bolgeler_fkey1" FromRole="tbl_degerlendirme" ToRole="tbl_bolgeler" />
+          <NavigationProperty Name="tbl_firmalar" Relationship="Self.firmalar_fkey5" FromRole="tbl_degerlendirme" ToRole="tbl_firmalar" />
+          <NavigationProperty Name="tbl_gorevler" Relationship="Self.gorevler_fkey" FromRole="tbl_degerlendirme" ToRole="tbl_gorevler" />
+          <NavigationProperty Name="tbl_personel" Relationship="Self.personel_fkey" FromRole="tbl_degerlendirme" ToRole="tbl_personel" />
+        </EntityType>
+        <EntityType Name="tbl_firmalar">
+          <Key>
+            <PropertyRef Name="firma_id" />
+          </Key>
+          <Property Name="firma_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firma_unvani" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firma_adi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_bolgeler" Relationship="Self.firmalar_fkey" FromRole="tbl_firmalar" ToRole="tbl_bolgeler" />
+          <NavigationProperty Name="tbl_calisma_yeri" Relationship="Self.firmalar_fkey6" FromRole="tbl_firmalar" ToRole="tbl_calisma_yeri" />
+          <NavigationProperty Name="tbl_degerlendirme" Relationship="Self.firmalar_fkey5" FromRole="tbl_firmalar" ToRole="tbl_degerlendirme" />
+          <NavigationProperty Name="tbl_gorevler" Relationship="Self.firmalar_fkey1" FromRole="tbl_firmalar" ToRole="tbl_gorevler" />
+          <NavigationProperty Name="tbl_sgk_kayit_yeri" Relationship="Self.firmalar_fkey2" FromRole="tbl_firmalar" ToRole="tbl_sgk_kayit_yeri" />
+          <NavigationProperty Name="tbl_personel" Relationship="Self.firmalar_fkey3" FromRole="tbl_firmalar" ToRole="tbl_personel" />
+          <NavigationProperty Name="tbl_kullanici" Relationship="Self.firmalar_fkey4" FromRole="tbl_firmalar" ToRole="tbl_kullanici" />
+        </EntityType>
+        <EntityType Name="tbl_gorevler">
+          <Key>
+            <PropertyRef Name="gorev_id" />
+          </Key>
+          <Property Name="gorev_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gorev_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bolge_id" Type="Int32" Nullable="false" />
+          <Property Name="firma_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_bolgeler" Relationship="Self.bolgeler_fkey" FromRole="tbl_gorevler" ToRole="tbl_bolgeler" />
+          <NavigationProperty Name="tbl_degerlendirme" Relationship="Self.gorevler_fkey" FromRole="tbl_gorevler" ToRole="tbl_degerlendirme" />
+          <NavigationProperty Name="tbl_firmalar" Relationship="Self.firmalar_fkey1" FromRole="tbl_gorevler" ToRole="tbl_firmalar" />
+        </EntityType>
+        <EntityType Name="tbl_izin_turu">
+          <Key>
+            <PropertyRef Name="izin_tur_id" />
+          </Key>
+          <Property Name="izin_tur_id" Type="Int32" Nullable="false" />
+          <Property Name="izin_tur_adi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_izinler" Relationship="Self.izin_turu_fkey" FromRole="tbl_izin_turu" ToRole="tbl_izinler" />
+        </EntityType>
+        <EntityType Name="tbl_izinler">
+          <Key>
+            <PropertyRef Name="izin_id" />
+          </Key>
+          <Property Name="izin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="personel_id" Type="Int32" Nullable="false" />
+          <Property Name="izin_baslama_tarihi" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="izin_bitis_tarihi" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="mazeret_id" Type="Int32" />
+          <Property Name="kullanilan_yillik_izin" Type="Int32" />
+          <Property Name="tahakkuk_eden_yillik_izin" Type="Int32" />
+          <Property Name="kalan_yillik_izin" Type="Int32" />
+          <Property Name="kullanilan_mazeret_izin" Type="Int32" />
+          <Property Name="calisilan_sure" Type="Int32" />
+          <Property Name="izin_tur_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_izin_turu" Relationship="Self.izin_turu_fkey" FromRole="tbl_izinler" ToRole="tbl_izin_turu" />
+          <NavigationProperty Name="tbl_mazeret_turu" Relationship="Self.mazeret_turu_fkey" FromRole="tbl_izinler" ToRole="tbl_mazeret_turu" />
+          <NavigationProperty Name="tbl_personel" Relationship="Self.personel_fkey1" FromRole="tbl_izinler" ToRole="tbl_personel" />
+        </EntityType>
+        <EntityType Name="tbl_kullanici">
+          <Key>
+            <PropertyRef Name="kullanici_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanici_adi" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adi" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="soyadi" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="firma_id" Type="Int32" />
+          <Property Name="yetki_grubu" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_firmalar" Relationship="Self.firmalar_fkey4" FromRole="tbl_kullanici" ToRole="tbl_firmalar" />
+        </EntityType>
+        <EntityType Name="tbl_mazeret_turu">
+          <Key>
+            <PropertyRef Name="mazeret_id" />
+          </Key>
+          <Property Name="mazeret_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mazeret_tur_adi" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_izinler" Relationship="Self.mazeret_turu_fkey" FromRole="tbl_mazeret_turu" ToRole="tbl_izinler" />
+        </EntityType>
+        <EntityType Name="tbl_ozluk_belgeler">
+          <Key>
+            <PropertyRef Name="belge_id" />
+          </Key>
+          <Property Name="belge_id" Type="Int32" Nullable="false" />
+          <Property Name="belge_adi" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_personel_ozluk" Relationship="Self.ozluk_belgeler_fkey" FromRole="tbl_ozluk_belgeler" ToRole="tbl_personel_ozluk" />
+        </EntityType>
+        <EntityType Name="tbl_personel">
+          <Key>
+            <PropertyRef Name="personel_id" />
+          </Key>
+          <Property Name="personel_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="personel_kodu" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="personel_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="personel_soyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sgk_kayit_yeri_id" Type="Int32" />
+          <Property Name="ise_giris_tarihi" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="isten_cikis_tarihi" Type="DateTime" Precision="0" />
+          <Property Name="firma_id" Type="Int32" />
+          <Property Name="durum" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="cinsiyet" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_degerlendirme" Relationship="Self.personel_fkey" FromRole="tbl_personel" ToRole="tbl_degerlendirme" />
+          <NavigationProperty Name="tbl_firmalar" Relationship="Self.firmalar_fkey3" FromRole="tbl_personel" ToRole="tbl_firmalar" />
+          <NavigationProperty Name="tbl_izinler" Relationship="Self.personel_fkey1" FromRole="tbl_personel" ToRole="tbl_izinler" />
+          <NavigationProperty Name="tbl_sgk_kayit_hareketleri" Relationship="Self.personel_fkey2" FromRole="tbl_personel" ToRole="tbl_sgk_kayit_hareketleri" />
+          <NavigationProperty Name="tbl_personel_ozluk" Relationship="Self.personel_fkey3" FromRole="tbl_personel" ToRole="tbl_personel_ozluk" />
+        </EntityType>
+        <EntityType Name="tbl_personel_ozluk">
+          <Key>
+            <PropertyRef Name="ozluk_id" />
+          </Key>
+          <Property Name="ozluk_id" Type="Int32" Nullable="false" />
+          <Property Name="personel_id" Type="Int32" Nullable="false" />
+          <Property Name="durum" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dosya_yolu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="dosya_adi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="belge_id" Type="Int32" />
+          <NavigationProperty Name="tbl_ozluk_belgeler" Relationship="Self.ozluk_belgeler_fkey" FromRole="tbl_personel_ozluk" ToRole="tbl_ozluk_belgeler" />
+          <NavigationProperty Name="tbl_personel" Relationship="Self.personel_fkey3" FromRole="tbl_personel_ozluk" ToRole="tbl_personel" />
+        </EntityType>
+        <EntityType Name="tbl_resmi_tatil">
+          <Key>
+            <PropertyRef Name="rt_id" />
+          </Key>
+          <Property Name="rt_id" Type="Int32" Nullable="false" />
+          <Property Name="tarih" Type="DateTime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_sgk_kayit_hareketleri">
+          <Key>
+            <PropertyRef Name="sgk_hareket_id" />
+          </Key>
+          <Property Name="sgk_hareket_id" Type="Int32" Nullable="false" />
+          <Property Name="personel_id" Type="Int32" Nullable="false" />
+          <Property Name="sgk_kayit_yeri_id" Type="Int32" Nullable="false" />
+          <Property Name="giris_tarihi" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="cikis_tarihi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tbl_personel" Relationship="Self.personel_fkey2" FromRole="tbl_sgk_kayit_hareketleri" ToRole="tbl_personel" />
+          <NavigationProperty Name="tbl_sgk_kayit_yeri" Relationship="Self.sgk_kayit_yeri_fkey" FromRole="tbl_sgk_kayit_hareketleri" ToRole="tbl_sgk_kayit_yeri" />
+        </EntityType>
+        <EntityType Name="tbl_sgk_kayit_yeri">
+          <Key>
+            <PropertyRef Name="sgk_kayit_yeri_id" />
+          </Key>
+          <Property Name="sgk_kayit_yeri_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sgk_kayit_yeri_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firma_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_firmalar" Relationship="Self.firmalar_fkey2" FromRole="tbl_sgk_kayit_yeri" ToRole="tbl_firmalar" />
+          <NavigationProperty Name="tbl_sgk_kayit_hareketleri" Relationship="Self.sgk_kayit_yeri_fkey" FromRole="tbl_sgk_kayit_yeri" ToRole="tbl_sgk_kayit_hareketleri" />
+        </EntityType>
+        <Association Name="bolgeler_fkey">
+          <End Role="tbl_bolgeler" Type="Self.tbl_bolgeler" Multiplicity="1" />
+          <End Role="tbl_gorevler" Type="Self.tbl_gorevler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_bolgeler">
+              <PropertyRef Name="bolge_id" />
+            </Principal>
+            <Dependent Role="tbl_gorevler">
+              <PropertyRef Name="bolge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bolgeler_fkey1">
+          <End Role="tbl_bolgeler" Type="Self.tbl_bolgeler" Multiplicity="1" />
+          <End Role="tbl_degerlendirme" Type="Self.tbl_degerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_bolgeler">
+              <PropertyRef Name="bolge_id" />
+            </Principal>
+            <Dependent Role="tbl_degerlendirme">
+              <PropertyRef Name="bolge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bolgeler_fkey2">
+          <End Role="tbl_bolgeler" Type="Self.tbl_bolgeler" Multiplicity="1" />
+          <End Role="tbl_calisma_yeri" Type="Self.tbl_calisma_yeri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_bolgeler">
+              <PropertyRef Name="bolge_id" />
+            </Principal>
+            <Dependent Role="tbl_calisma_yeri">
+              <PropertyRef Name="bolge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="1" />
+          <End Role="tbl_bolgeler" Type="Self.tbl_bolgeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_bolgeler">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey6">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="1" />
+          <End Role="tbl_calisma_yeri" Type="Self.tbl_calisma_yeri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_calisma_yeri">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey5">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="1" />
+          <End Role="tbl_degerlendirme" Type="Self.tbl_degerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_degerlendirme">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gorevler_fkey">
+          <End Role="tbl_gorevler" Type="Self.tbl_gorevler" Multiplicity="1" />
+          <End Role="tbl_degerlendirme" Type="Self.tbl_degerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_gorevler">
+              <PropertyRef Name="gorev_id" />
+            </Principal>
+            <Dependent Role="tbl_degerlendirme">
+              <PropertyRef Name="gorev_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personel_fkey">
+          <End Role="tbl_personel" Type="Self.tbl_personel" Multiplicity="1" />
+          <End Role="tbl_degerlendirme" Type="Self.tbl_degerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="tbl_degerlendirme">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey1">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="1" />
+          <End Role="tbl_gorevler" Type="Self.tbl_gorevler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_gorevler">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey2">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="1" />
+          <End Role="tbl_sgk_kayit_yeri" Type="Self.tbl_sgk_kayit_yeri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_sgk_kayit_yeri">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey3">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="0..1" />
+          <End Role="tbl_personel" Type="Self.tbl_personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_personel">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="firmalar_fkey4">
+          <End Role="tbl_firmalar" Type="Self.tbl_firmalar" Multiplicity="0..1" />
+          <End Role="tbl_kullanici" Type="Self.tbl_kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_firmalar">
+              <PropertyRef Name="firma_id" />
+            </Principal>
+            <Dependent Role="tbl_kullanici">
+              <PropertyRef Name="firma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="izin_turu_fkey">
+          <End Role="tbl_izin_turu" Type="Self.tbl_izin_turu" Multiplicity="1" />
+          <End Role="tbl_izinler" Type="Self.tbl_izinler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_izin_turu">
+              <PropertyRef Name="izin_tur_id" />
+            </Principal>
+            <Dependent Role="tbl_izinler">
+              <PropertyRef Name="izin_tur_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="mazeret_turu_fkey">
+          <End Role="tbl_mazeret_turu" Type="Self.tbl_mazeret_turu" Multiplicity="0..1" />
+          <End Role="tbl_izinler" Type="Self.tbl_izinler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mazeret_turu">
+              <PropertyRef Name="mazeret_id" />
+            </Principal>
+            <Dependent Role="tbl_izinler">
+              <PropertyRef Name="mazeret_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personel_fkey1">
+          <End Role="tbl_personel" Type="Self.tbl_personel" Multiplicity="1" />
+          <End Role="tbl_izinler" Type="Self.tbl_izinler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="tbl_izinler">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ozluk_belgeler_fkey">
+          <End Role="tbl_ozluk_belgeler" Type="Self.tbl_ozluk_belgeler" Multiplicity="0..1" />
+          <End Role="tbl_personel_ozluk" Type="Self.tbl_personel_ozluk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ozluk_belgeler">
+              <PropertyRef Name="belge_id" />
+            </Principal>
+            <Dependent Role="tbl_personel_ozluk">
+              <PropertyRef Name="belge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personel_fkey2">
+          <End Role="tbl_personel" Type="Self.tbl_personel" Multiplicity="1" />
+          <End Role="tbl_sgk_kayit_hareketleri" Type="Self.tbl_sgk_kayit_hareketleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="tbl_sgk_kayit_hareketleri">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personel_fkey3">
+          <End Role="tbl_personel" Type="Self.tbl_personel" Multiplicity="1" />
+          <End Role="tbl_personel_ozluk" Type="Self.tbl_personel_ozluk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="tbl_personel_ozluk">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sgk_kayit_yeri_fkey">
+          <End Role="tbl_sgk_kayit_yeri" Type="Self.tbl_sgk_kayit_yeri" Multiplicity="1" />
+          <End Role="tbl_sgk_kayit_hareketleri" Type="Self.tbl_sgk_kayit_hareketleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_sgk_kayit_yeri">
+              <PropertyRef Name="sgk_kayit_yeri_id" />
+            </Principal>
+            <Dependent Role="tbl_sgk_kayit_hareketleri">
+              <PropertyRef Name="sgk_kayit_yeri_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_personelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_bolgeler" EntityType="Self.tbl_bolgeler" />
+          <EntitySet Name="tbl_calisma_yeri" EntityType="Self.tbl_calisma_yeri" />
+          <EntitySet Name="tbl_degerlendirme" EntityType="Self.tbl_degerlendirme" />
+          <EntitySet Name="tbl_firmalar" EntityType="Self.tbl_firmalar" />
+          <EntitySet Name="tbl_gorevler" EntityType="Self.tbl_gorevler" />
+          <EntitySet Name="tbl_izin_turu" EntityType="Self.tbl_izin_turu" />
+          <EntitySet Name="tbl_izinler" EntityType="Self.tbl_izinler" />
+          <EntitySet Name="tbl_kullanici" EntityType="Self.tbl_kullanici" />
+          <EntitySet Name="tbl_mazeret_turu" EntityType="Self.tbl_mazeret_turu" />
+          <EntitySet Name="tbl_ozluk_belgeler" EntityType="Self.tbl_ozluk_belgeler" />
+          <EntitySet Name="tbl_personel" EntityType="Self.tbl_personel" />
+          <EntitySet Name="tbl_personel_ozluk" EntityType="Self.tbl_personel_ozluk" />
+          <EntitySet Name="tbl_resmi_tatil" EntityType="Self.tbl_resmi_tatil" />
+          <EntitySet Name="tbl_sgk_kayit_hareketleri" EntityType="Self.tbl_sgk_kayit_hareketleri" />
+          <EntitySet Name="tbl_sgk_kayit_yeri" EntityType="Self.tbl_sgk_kayit_yeri" />
+          <AssociationSet Name="bolgeler_fkey" Association="Self.bolgeler_fkey">
+            <End Role="tbl_bolgeler" EntitySet="tbl_bolgeler" />
+            <End Role="tbl_gorevler" EntitySet="tbl_gorevler" />
+          </AssociationSet>
+          <AssociationSet Name="bolgeler_fkey1" Association="Self.bolgeler_fkey1">
+            <End Role="tbl_bolgeler" EntitySet="tbl_bolgeler" />
+            <End Role="tbl_degerlendirme" EntitySet="tbl_degerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="bolgeler_fkey2" Association="Self.bolgeler_fkey2">
+            <End Role="tbl_bolgeler" EntitySet="tbl_bolgeler" />
+            <End Role="tbl_calisma_yeri" EntitySet="tbl_calisma_yeri" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey" Association="Self.firmalar_fkey">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_bolgeler" EntitySet="tbl_bolgeler" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey6" Association="Self.firmalar_fkey6">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_calisma_yeri" EntitySet="tbl_calisma_yeri" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey5" Association="Self.firmalar_fkey5">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_degerlendirme" EntitySet="tbl_degerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="gorevler_fkey" Association="Self.gorevler_fkey">
+            <End Role="tbl_gorevler" EntitySet="tbl_gorevler" />
+            <End Role="tbl_degerlendirme" EntitySet="tbl_degerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="personel_fkey" Association="Self.personel_fkey">
+            <End Role="tbl_personel" EntitySet="tbl_personel" />
+            <End Role="tbl_degerlendirme" EntitySet="tbl_degerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey1" Association="Self.firmalar_fkey1">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_gorevler" EntitySet="tbl_gorevler" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey2" Association="Self.firmalar_fkey2">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_sgk_kayit_yeri" EntitySet="tbl_sgk_kayit_yeri" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey3" Association="Self.firmalar_fkey3">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_personel" EntitySet="tbl_personel" />
+          </AssociationSet>
+          <AssociationSet Name="firmalar_fkey4" Association="Self.firmalar_fkey4">
+            <End Role="tbl_firmalar" EntitySet="tbl_firmalar" />
+            <End Role="tbl_kullanici" EntitySet="tbl_kullanici" />
+          </AssociationSet>
+          <AssociationSet Name="izin_turu_fkey" Association="Self.izin_turu_fkey">
+            <End Role="tbl_izin_turu" EntitySet="tbl_izin_turu" />
+            <End Role="tbl_izinler" EntitySet="tbl_izinler" />
+          </AssociationSet>
+          <AssociationSet Name="mazeret_turu_fkey" Association="Self.mazeret_turu_fkey">
+            <End Role="tbl_mazeret_turu" EntitySet="tbl_mazeret_turu" />
+            <End Role="tbl_izinler" EntitySet="tbl_izinler" />
+          </AssociationSet>
+          <AssociationSet Name="personel_fkey1" Association="Self.personel_fkey1">
+            <End Role="tbl_personel" EntitySet="tbl_personel" />
+            <End Role="tbl_izinler" EntitySet="tbl_izinler" />
+          </AssociationSet>
+          <AssociationSet Name="ozluk_belgeler_fkey" Association="Self.ozluk_belgeler_fkey">
+            <End Role="tbl_ozluk_belgeler" EntitySet="tbl_ozluk_belgeler" />
+            <End Role="tbl_personel_ozluk" EntitySet="tbl_personel_ozluk" />
+          </AssociationSet>
+          <AssociationSet Name="personel_fkey2" Association="Self.personel_fkey2">
+            <End Role="tbl_personel" EntitySet="tbl_personel" />
+            <End Role="tbl_sgk_kayit_hareketleri" EntitySet="tbl_sgk_kayit_hareketleri" />
+          </AssociationSet>
+          <AssociationSet Name="personel_fkey3" Association="Self.personel_fkey3">
+            <End Role="tbl_personel" EntitySet="tbl_personel" />
+            <End Role="tbl_personel_ozluk" EntitySet="tbl_personel_ozluk" />
+          </AssociationSet>
+          <AssociationSet Name="sgk_kayit_yeri_fkey" Association="Self.sgk_kayit_yeri_fkey">
+            <End Role="tbl_sgk_kayit_yeri" EntitySet="tbl_sgk_kayit_yeri" />
+            <End Role="tbl_sgk_kayit_hareketleri" EntitySet="tbl_sgk_kayit_hareketleri" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_personelModelStoreContainer" CdmEntityContainer="db_personelEntities">
+          <EntitySetMapping Name="tbl_bolgeler">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_bolgeler">
+              <MappingFragment StoreEntitySet="tbl_bolgeler">
+                <ScalarProperty Name="bolge_id" ColumnName="bolge_id" />
+                <ScalarProperty Name="bolge_adi" ColumnName="bolge_adi" />
+                <ScalarProperty Name="firma_id" ColumnName="firma_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_calisma_yeri">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_calisma_yeri">
+              <MappingFragment StoreEntitySet="tbl_calisma_yeri">
+                <ScalarProperty Name="calisma_id" ColumnName="calisma_id" />
+                <ScalarProperty Name="calisma_yeri_adi" ColumnName="calisma_yeri_adi" />
+                <ScalarProperty Name="bolge_id" ColumnName="bolge_id" />
+                <ScalarProperty Name="firma_id" ColumnName="firma_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_degerlendirme">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_degerlendirme">
+              <MappingFragment StoreEntitySet="tbl_degerlendirme">
+                <ScalarProperty Name="degerlendirme_id" ColumnName="degerlendirme_id" />
+                <ScalarProperty Name="donem" ColumnName="donem" />
+                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
+                <ScalarProperty Name="gorev_id" ColumnName="gorev_id" />
+                <ScalarProperty Name="puan" ColumnName="puan" />
+                <ScalarProperty Name="bolge_id" ColumnName="bolge_id" />
+                <ScalarProperty Name="firma_id" ColumnName="firma_id" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_firmalar">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_firmalar">
+              <MappingFragment StoreEntitySet="tbl_firmalar">
+                <ScalarProperty Name="firma_id" ColumnName="firma_id" />
+                <ScalarProperty Name="firma_unvani" ColumnName="firma_unvani" />
+                <ScalarProperty Name="firma_adi" ColumnName="firma_adi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_gorevler">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_gorevler">
+              <MappingFragment StoreEntitySet="tbl_gorevler">
+                <ScalarProperty Name="gorev_id" ColumnName="gorev_id" />
+                <ScalarProperty Name="gorev_adi" ColumnName="gorev_adi" />
+                <ScalarProperty Name="bolge_id" ColumnName="bolge_id" />
+                <ScalarProperty Name="firma_id" ColumnName="firma_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_izin_turu">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_izin_turu">
+              <MappingFragment StoreEntitySet="tbl_izin_turu">
+                <ScalarProperty Name="izin_tur_id" ColumnName="izin_tur_id" />
+                <ScalarProperty Name="izin_tur_adi" ColumnName="izin_tur_adi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_izinler">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_izinler">
+              <MappingFragment StoreEntitySet="tbl_izinler">
+                <ScalarProperty Name="izin_id" ColumnName="izin_id" />
+                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
+                <ScalarProperty Name="izin_baslama_tarihi" ColumnName="izin_baslama_tarihi" />
+                <ScalarProperty Name="izin_bitis_tarihi" ColumnName="izin_bitis_tarihi" />
+                <ScalarProperty Name="mazeret_id" ColumnName="mazeret_id" />
+                <ScalarProperty Name="kullanilan_yillik_izin" ColumnName="kullanilan_yillik_izin" />
+                <ScalarProperty Name="tahakkuk_eden_yillik_izin" ColumnName="tahakkuk_eden_yillik_izin" />
+                <ScalarProperty Name="kalan_yillik_izin" ColumnName="kalan_yillik_izin" />
+                <ScalarProperty Name="kullanilan_mazeret_izin" ColumnName="kullanilan_mazeret_izin" />
+                <ScalarProperty Name="calisilan_sure" ColumnName="calisilan_sure" />
+                <ScalarProperty Name="izin_tur_id" ColumnName="izin_tur_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_kullanici">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_kullanici">
+              <MappingFragment StoreEntitySet="tbl_kullanici">
+                <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
+                <ScalarProperty Name="kullanici_adi" ColumnName="kullanici_adi" />
+                <ScalarProperty Name="adi" ColumnName="adi" />
+                <ScalarProperty Name="soyadi" ColumnName="soyadi" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="firma_id" ColumnName="firma_id" />
+                <ScalarProperty Name="yetki_grubu" ColumnName="yetki_grubu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_mazeret_turu">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_mazeret_turu">
+              <MappingFragment StoreEntitySet="tbl_mazeret_turu">
+                <ScalarProperty Name="mazeret_id" ColumnName="mazeret_id" />
+                <ScalarProperty Name="mazeret_tur_adi" ColumnName="mazeret_tur_adi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ozluk_belgeler">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_ozluk_belgeler">
+              <MappingFragment StoreEntitySet="tbl_ozluk_belgeler">
+                <ScalarProperty Name="belge_id" ColumnName="belge_id" />
+                <ScalarProperty Name="belge_adi" ColumnName="belge_adi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_personel">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_personel">
+              <MappingFragment StoreEntitySet="tbl_personel">
+                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
+                <ScalarProperty Name="personel_kodu" ColumnName="personel_kodu" />
+                <ScalarProperty Name="personel_adi" ColumnName="personel_adi" />
+                <ScalarProperty Name="personel_soyadi" ColumnName="personel_soyadi" />
+                <ScalarProperty Name="sgk_kayit_yeri_id" ColumnName="sgk_kayit_yeri_id" />
+                <ScalarProperty Name="ise_giris_tarihi" ColumnName="ise_giris_tarihi" />
+                <ScalarProperty Name="isten_cikis_tarihi" ColumnName="isten_cikis_tarihi" />
+                <ScalarProperty Name="firma_id" ColumnName="firma_id" />
+                <ScalarProperty Name="durum" ColumnName="durum" />
+                <ScalarProperty Name="cinsiyet" ColumnName="cinsiyet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_personel_ozluk">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_personel_ozluk">
+              <MappingFragment StoreEntitySet="tbl_personel_ozluk">
+                <ScalarProperty Name="ozluk_id" ColumnName="ozluk_id" />
+                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
+                <ScalarProperty Name="durum" ColumnName="durum" />
+                <ScalarProperty Name="dosya_yolu" ColumnName="dosya_yolu" />
+                <ScalarProperty Name="dosya_adi" ColumnName="dosya_adi" />
+                <ScalarProperty Name="belge_id" ColumnName="belge_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_resmi_tatil">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_resmi_tatil">
+              <MappingFragment StoreEntitySet="tbl_resmi_tatil">
+                <ScalarProperty Name="rt_id" ColumnName="rt_id" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_sgk_kayit_hareketleri">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_sgk_kayit_hareketleri">
+              <MappingFragment StoreEntitySet="tbl_sgk_kayit_hareketleri">
+                <ScalarProperty Name="sgk_hareket_id" ColumnName="sgk_hareket_id" />
+                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
+                <ScalarProperty Name="sgk_kayit_yeri_id" ColumnName="sgk_kayit_yeri_id" />
+                <ScalarProperty Name="giris_tarihi" ColumnName="giris_tarihi" />
+                <ScalarProperty Name="cikis_tarihi" ColumnName="cikis_tarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_sgk_kayit_yeri">
+            <EntityTypeMapping TypeName="db_personelModel.tbl_sgk_kayit_yeri">
+              <MappingFragment StoreEntitySet="tbl_sgk_kayit_yeri">
+                <ScalarProperty Name="sgk_kayit_yeri_id" ColumnName="sgk_kayit_yeri_id" />
+                <ScalarProperty Name="sgk_kayit_yeri_adi" ColumnName="sgk_kayit_yeri_adi" />
+                <ScalarProperty Name="firma_id" ColumnName="firma_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

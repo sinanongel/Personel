@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d23946c3a37349cd92da504bb76e3750" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="db_personelModel.tbl_bolgeler" Width="1.5" PointX="5.25" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_calisma_yeri" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_degerlendirme" Width="1.5" PointX="9.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_firmalar" Width="1.5" PointX="2.625" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_gorevler" Width="1.5" PointX="7.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_izin_turu" Width="1.5" PointX="15.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_izinler" Width="1.5" PointX="13.875" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_kullanici" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_mazeret_turu" Width="1.5" PointX="15.875" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_ozluk_belgeler" Width="1.5" PointX="11.875" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_personel" Width="1.5" PointX="7.625" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_personel_ozluk" Width="1.5" PointX="11.875" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_resmi_tatil" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_sgk_kayit_hareketleri" Width="1.5" PointX="5.375" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_personelModel.tbl_sgk_kayit_yeri" Width="1.5" PointX="0.5" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="db_personelModel.bolgeler_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.bolgeler_fkey1" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.bolgeler_fkey2" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.firmalar_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.firmalar_fkey6" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.firmalar_fkey5" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.gorevler_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.personel_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.firmalar_fkey1" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.firmalar_fkey2" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.firmalar_fkey3" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.firmalar_fkey4" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.izin_turu_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.mazeret_turu_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.personel_fkey1" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.ozluk_belgeler_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.personel_fkey2" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.personel_fkey3" ManuallyRouted="false" />
+        <AssociationConnector Association="db_personelModel.sgk_kayit_yeri_fkey" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,99 @@
+﻿@using Personel.Models.Entity
+@model List<tbl_sgk_kayit_yeri>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h4>SGK Kayıt Yeri Listesi</h4></div>
+            <div class="panel-body">
+                <table style="margin-top:15px;" class="table table-bordered">
+                    <tr class="warning">
+                        <th>SGK Kayıt Yeri Id</th>
+                        <th>SGK Kayıt Yeri Adı</th>
+                        <th>Firma Adı</th>
+                        <th style="width:100px"></th>
+                    </tr>
+                    <tbody>
+                        @foreach (var sgk in Model)
+                        {
+                            <tr>
+                                <td>@sgk.sgk_kayit_yeri_id</td>
+                                <td>@sgk.sgk_kayit_yeri_adi</td>
+                                <td>@sgk.tbl_firmalar.firma_adi</td>
+                                <td><a href="#" class="btn btn-xs btn-success guncelle" data-target="@Url.Action("SgkKayitYeriGetir","SgkKayitYeri")//@sgk.sgk_kayit_yeri_id"><i class="glyphicon glyphicon-refresh"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a href="#" class="btn btn-primary ekle" data-target="@Url.Action("ComboboxGetir","SgkKayitYeri")">SGK Kayit Yeri Ekle</a>
+
+                <div class="container">
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModalE" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModalG" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("body").on("click", ".ekle", function () {
+                var url = $(this).data("target");
+                $.post(url, function (data) { })
+                    .done(function (data) {
+                        $("#myModalE .modal-body").html(data);
+                        $("#myModalE").modal("show");
+                    })
+                    .fail(function () {
+                        $("#myModalE .modal-body").text("Hata!!");
+                        $("#myModalE").modal("show");
+                    })
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("body").on("click", ".guncelle", function () {
+                var url = $(this).data("target");
+                $.post(url, function (data) { })
+                    .done(function (data) {
+                        $("#myModalG .modal-body").html(data);
+                        $("#myModalG").modal("show");
+                    })
+                    .fail(function () {
+                        $("#myModalG .modal-body").text("Hata!!");
+                        $("#myModalG").modal("show");
+                    })
+            });
+        });
+
+    </script>
+}

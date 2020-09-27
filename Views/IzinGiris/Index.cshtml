@@ -1,0 +1,132 @@
+﻿@model Tuple<Personel.Models.Entity.tbl_personel, List<Personel.ViewModel.IzinListe>>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="container" style="width:1000px">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 style="text-align:left;">İzin Listesi</h4>
+                <h4 style="text-align:right; font-size:15px;">@Html.DisplayTextFor(model => model.Item1.personel_kodu) - @Html.DisplayFor(model => model.Item1.personel_adi) @Html.DisplayFor(model => model.Item1.personel_soyadi)</h4>
+            </div>
+            <div class="panel-body">
+                <table style="width:auto; margin-top: 15px;" class="table table-bordered">
+                    <tr class="warning">
+                        @*<th style="width:70px;">İzin Id</th>*@
+                        <th style="width:170px;">İzin Başlama Tarihi</th>
+                        <th style="width:170px;">İzin Bitiş Tarihi</th>
+                        <th style="width:100px;">İzin Türü</th>
+                        <th style="width:120px;">Mazeret Türü</th>
+                        <th style="width:100px;">Kullanılan Mazeret İzni(Gün)</th>
+                        <th style="width:100px;">Tahakkuk Eden Yıllık İzin(Gün)</th>
+                        <th style="width:100px;">Kullanılan Yıllık İzin(Gün)</th>
+                        @*<th style="width:100px; vertical-align:central;">Kalan Yıllık İzin(Gün)</th>*@
+                    </tr>
+                    <tbody>
+                        @foreach (var izin in Model.Item2)
+                        {
+                            <tr>
+                                <td hidden>@izin.izinDetay.izin_id</td>
+                                <td style="text-align:center;">@izin.izinDetay.izin_baslama_tarihi.ToString("dd.MM.yyyy")</td>
+                                <td style="text-align:center;">@izin.izinDetay.izin_bitis_tarihi.ToString("dd.MM.yyyy")</td>
+                                <td>@izin.izinTurDetay.izin_tur_adi</td>
+                                <td>@izin.mazeretDetay.mazeret_tur_adi</td>
+                                <td style="text-align:center;">@izin.izinDetay.kullanilan_mazeret_izin</td>
+                                <td style="text-align:center;">@izin.izinDetay.tahakkuk_eden_yillik_izin</td>
+                                <td style="text-align:center;">@izin.izinDetay.kullanilan_yillik_izin</td>
+                                @*<td style="text-align:center;">@izin.izinDetay.kalan_yillik_izin</td>*@
+                                <td><a href="#" class="btn btn-xs btn-success guncelle" data-target="@Url.Action("IzinGetir", "IzinGiris")/@izin.izinDetay.izin_id"><i class="glyphicon glyphicon-refresh"></i></a></td>
+                                <td><a href="@Url.Action("Sil", "IzinGiris")/@izin.izinDetay.izin_id" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove-circle"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="col-sm-10">
+                    <a href="#" class="btn btn-primary ekle" data-target="@Url.Action("ComboboxGetir", "IzinGiris")/@Model.Item1.personel_id">Ekle</a>
+                    <a href="@Url.Action("Index", "PersonelGiris")" class="btn btn-success">Personel Listesi</a>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-danger">
+                        Kalan İzin : <span class="badge badge-light">@ViewBag.kalYIzin</span>
+                    </button>
+                </div>
+                <div class="container">
+                    <!-- Modal -->
+                    <div class="col-sm-12 modal fade" id="myModalE" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                @*<div class="modal-header" style="background-color:aqua">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">İzin Giriş</h4>
+                    </div>*@
+                                <div class="modal-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModalG" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                @*<div class="modal-header" style="background-color:aqua">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">İzin Giriş</h4>
+                        </div>*@
+                                <div class="modal-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Panel Premiy -->
+    </div>
+    <!-- Panel group -->
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("body").on("click", ".ekle", function () {
+                var url = $(this).data("target");
+                $.post(url, function (data) { })
+                    .done(function (data) {
+                        $("#myModalE .modal-body").html(data);
+                        $("#myModalE").modal("show");
+                    })
+                    .fail(function () {
+                        $("#myModalE .modal-body").text("Hata!!");
+                        $("#myModalE").modal("show");
+                    })
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("body").on("click", ".guncelle", function () {
+                var url = $(this).data("target");
+                $.post(url, function (data) { })
+                    .done(function (data) {
+                        $("#myModalG .modal-body").html(data);
+                        $("#myModalG").modal("show");
+                    })
+                    .fail(function () {
+                        $("#myModalG .modal-body").text("Hata!!");
+                        $("#myModalG").modal("show");
+                    })
+            });
+        });
+
+    </script>
+}
+

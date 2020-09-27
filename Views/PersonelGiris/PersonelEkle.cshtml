@@ -1,0 +1,88 @@
+﻿@model Personel.Models.Entity.tbl_personel 
+
+<div class="container" style="margin-top:15px; width:570px;">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h4>Yeni Personel Girişi</h4></div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="@Url.Action("PersonelEkle", "PersonelGiris")" method="post">
+                    <div>
+                        <label class="control-label col-sm-5">Personel Kodu</label>
+                        <input style="width:75px;" type="text" class="form-control" name="personel_kodu" required="" maxlength="50" />
+                    </div>
+                    <br />
+                    <div>
+                        <label class="control-label col-sm-5">Adı</label>
+                        <input style="width:200px;" type="text" class="form-control" name="personel_adi" required="" maxlength="50" />
+                    </div>
+                    <br />
+                    <div>
+                        <label class="control-label col-sm-5">Soyadı</label>
+                        <input style="width:200px;" type="text" class="form-control" name="personel_soyadi" required="" maxlength="50" />
+                    </div>
+                    <br />
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <label class="control-label col-sm-5">Cinsiyet</label>
+                            <input class="form-check-input" type="radio" name="cinsiyet" id="erkek" value="ERKEK">
+                            <label class="form-check-label" for="inlineRadio1">Erkek</label>
+                            <input class="form-check-input" type="radio" name="cinsiyet" id="kadın" value="KADIN">
+                            <label class="form-check-label" for="inlineRadio2">Kadın</label>
+                        </div>
+                    </fieldset>
+                    <br />
+                    <div>
+                        <label class="control-label col-sm-5">Firma</label>
+                        @Html.DropDownListFor(f => f.firma_id, Model.FirmaList, new { @class = "form-control", @style = "width:200px;" })
+                    </div>
+                    @*<div>
+                        <label class="control-label col-sm-5">SGK Kayıt Yeri</label>
+                        @Html.DropDownListFor(f => f.sgk_kayit_yeri_id, Model.SgkKayitYeriList, new { @class = "form-control", @style = "width:200px;" })
+                    </div>*@
+                    <br />
+                    <div>
+                        <label class="control-label col-sm-5">İşe Giriş Tarihi</label>
+                        <input style="width:150px;" type="date" class="form-control" name="ise_giris_tarihi" required="" maxlength="50" />
+                    </div>
+                    <br />
+                    <div>
+                        <label class="control-label col-sm-5">İşten Çıkış Tarihi</label>
+                        <input style="width:150px;" type="date" class="form-control" name="isten_cikis_tarihi" maxlength="50" />
+                    </div>
+                    <br />
+                    <div class="col-sm-offset-7" style="margin-top:10px;">
+                        <button class="btn btn-info" style="width:100px;">Ekle</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*@section scripts
+{*@
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $('#firma_id').change(function () {
+                var id = $(this).val();
+                var sgkKayitList = $("#sgk_kayit_yeri_id");
+                sgkKayitList.empty();
+                $.ajax({
+                    url: '@Url.Action("SgkKayitYeriList", "PersonelGiris")',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { 'id': id },
+                    success: function (data) {
+                        $.each(data, function (index, option) {
+                            sgkKayitList.append('<option value=' + option.Value + ' > ' + option.Text + '</option>');
+                        });
+                    }
+                });
+            });
+
+        });
+</script>*@
+
+@*}*@

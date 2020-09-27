@@ -1,0 +1,25 @@
+﻿@model Personel.Models.Entity.tbl_bolgeler
+@{
+    ViewBag.Title = "BolgeEkle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Bölge Ekleme</h2>
+<br />
+
+<form class="form-inline" method="post">
+    <div>
+        <label class="col-sm-2">Bölge Adı</label>
+        <input style="width:200px;" type="text" class="form-control" name="bolge_adi" required="" maxlength="50" />
+    </div>
+    <br />
+    <div>
+        <label class="col-sm-2">Firma Seçiniz</label>
+        @Html.DropDownListFor(f => f.tbl_firmalar.firma_id, (List<SelectListItem>)ViewBag.blg, new { @class = "form-control", @style = "width:200px;" })
+    </div>
+    <br />
+    <div class="col-sm-2" style="margin-top:10px;">
+        <button class="btn btn-info" style="width:100px;">Ekle</button>
+    </div>
+</form>
+

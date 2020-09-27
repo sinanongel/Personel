@@ -1,0 +1,30 @@
+﻿@using Personel.Models.Entity
+@model List<tbl_bolgeler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Bölge Listesi</h2>
+<br />
+<table style="margin-top:15px;" class="table table-bordered">
+    <tr>
+        <th>BÖLGE ID</th>
+        <th>BOLGE ADI</th>
+        <th>FİRMA ADI</th>
+        <th style="width:50px" ></th>
+    </tr>
+    <tbody>
+        @foreach (var blg in Model)
+        {
+            <tr>
+                <td>@blg.bolge_id</td>
+                <td>@blg.bolge_adi</td>
+                <td>@blg.tbl_firmalar.firma_adi</td>
+                <td style="width:auto"><a href="@Url.Action("BolgeGetir","Bolge")/@blg.bolge_id" class="btn btn-success" style="width:100px">Güncelle</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="@Url.Action("BolgeEkle","Bolge")" class="btn btn-primary" style="width:100px" >Bölge Ekle</a>
+

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Personel.ViewModel.IzinListe>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 style="text-align:left;">Yıllık İzin İcmali</h4>
+            </div>
+            <div class="panel-body">
+                <table id="tbl1" class="table table-bordered">
+                    <thead>
+                        <tr class="warning">
+                            @*<th style="width:70px;">İzin Id</th>*@
+                            <th style="width:300px;">Personel</th>
+                            <th style="width:300px;">Firma</th>
+                            <th style="width:170px;">İşe Başlama Tarihi</th>
+                            <th style="width:150px;">Tahakkuk Eden Toplam İzin(Gün)</th>
+                            <th style="width:150px;">Kullanılan Toplam İzin(Gün)</th>
+                            <th style="width:150px;">Kalan Toplam İzin(Gün)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var izin in Model)
+                        {
+                            <tr>
+                                @*<td hidden>@izin.izin_id</td>*@
+                                <td>@izin.PersonelAdi</td>
+                                <td>@izin.FirmaAdi</td>
+                                <td style="text-align:center;">@izin.İseGirisTarihi.ToString("dd.MM.yyyy")</td>
+                                <td style="text-align:center;">@izin.TahEdenToplam</td>
+                                <td style="text-align:center;">@izin.KulToplam</td>
+                                <td style="text-align:center;">@izin.KalanYIzin</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Panel Premiy -->
+    </div>
+    <!-- Panel group -->
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#tbl1').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
+                'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>

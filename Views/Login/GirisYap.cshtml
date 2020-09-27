@@ -1,0 +1,96 @@
+﻿@model Personel.Models.Entity.tbl_kullanici
+
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    @*<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>*@
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link href="~/Content/login-yeni.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">*@
+</head>
+<body>
+    <div class="main">
+
+
+        <div class="container">
+            <center>
+                <div style="color:black"><h4>PERSONEL YÖNETİM SİSTEMİ</h4></div><br />
+                <div class="middle">
+                    <div id="login">
+                        @*<form action="javascript:void(0);" method="get">*@
+                        @using (Html.BeginForm("GirisYap", "Login", FormMethod.Post))
+                        {
+                            <fieldset class="clearfix">
+                                <p><span class="fa fa-user"></span><input type="text" name="kullanici_adi" Placeholder="Kullanıcı Adı" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+                                <p><span class="fa fa-lock"></span><input type="password" name="sifre" Placeholder="Şifre" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+
+                                <div>
+                                    <span style="width:48%; text-align:left;  display: inline-block;">
+                                        <a class="small-text" href="#">
+                                            @*Forgot
+                                    password?*@
+                                        </a>
+                                    </span>
+                                    <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="GİRİŞ"></span>
+                                </div>
+
+                            </fieldset>
+                            <div class="clearfix"></div>
+                        }
+
+                        @*</form>*@
+
+                        <div class="clearfix"></div>
+
+                    </div> <!-- end login -->
+                    <div class="logo">
+                        @*<img src="~/images/viraLogoY.jpg" /*@
+                        <img src="~/images/logoKalemci.jpg" />
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </center>
+        </div>
+
+    </div>
+
+    @*<div class="container" style="width:425px;">
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h4>GİRİŞ</h4></div>
+                    <div class="panel-body">
+                        <div class="container">
+                            @using (Html.BeginForm("GirisYap", "Login", FormMethod.Post))
+                            {
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input id="email" type="text" class="form-control" name="kullanici_adi" placeholder="Kullanıcı Adı">
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input id="password" type="password" class="form-control" name="sifre" placeholder="Şifre">
+                                </div>
+                                <br>
+                                <button class="btn btn-primary">Giriş</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+</body>
+</html>

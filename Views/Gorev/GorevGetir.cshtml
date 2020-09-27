@@ -1,0 +1,27 @@
+﻿@model Personel.Models.Entity.tbl_gorevler
+@{
+    ViewBag.Title = "GorevGetir";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Görev Bilgileri</h2>
+<br />
+@using (Html.BeginForm("GorevGuncelle", "Gorev", FormMethod.Post))
+{
+    <div class="form-inline">
+        @Html.LabelFor(g => g.gorev_id, "GÖREV ID", new { @class = "col-sm-2" })
+        @Html.TextBoxFor(g => g.gorev_id, new { @class = "form-control", @style = "width:100px;" })
+        <br /><br />
+        @Html.LabelFor(g => g.gorev_adi, "GÖREV ADI", new { @class = "col-sm-2" })
+        @Html.TextBoxFor(g => g.gorev_adi, new { @class = "form-control", @style = "width:250px;" })
+        <br /><br />
+        @Html.LabelFor(g => g.firma_id, "FİRMA ADI", new { @class = "col-sm-2" })
+        @Html.DropDownListFor(f => f.tbl_firmalar.firma_id, (List<SelectListItem>)ViewBag.frm, new { @class = "form-control", @style = "width:200px;" })
+        <br /><br />
+        @Html.LabelFor(g => g.bolge_id, "BÖLGE ADI", new { @class = "col-sm-2" })
+        @Html.DropDownListFor(b => b.tbl_bolgeler.bolge_id, (List<SelectListItem>)ViewBag.blg, new { @class = "form-control", @style = "width:200px;" })        
+    </div>
+    <div class="col-sm-2" style="margin-top:10px;">
+        <button class="btn btn-success" style="width:100px;">Güncelle</button>
+    </div>
+}

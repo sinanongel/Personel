@@ -1,0 +1,162 @@
+﻿@model Personel.Models.Entity.tbl_izinler
+
+<div class="container" style="margin-top:15px; width:570px;">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h4>İzin Girişi</h4></div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="@Url.Action("IzinEkle", "IzinGiris")" method="post">
+                    <div>
+                        <label class="control-label col-sm-5" style="color:red;"><b>Personel Id</b></label>
+                        <input readonly class="form-control-static" value="@ViewBag.pId" name="personel_id" style="width:100px; color:red; font-weight:bold; border:none;" />
+                    </div>
+                    <br />
+                    <div style="color:red;">
+                        <label class="control-label col-sm-5">Personel</label>
+                        <label class="control-label"> @ViewBag.pKodu - @ViewBag.pAdi @ViewBag.pSoyadi</label>
+                    </div>
+                    <br />
+                    <div>
+                        <label class="control-label col-sm-5">İzin Türü</label>                    
+                        @Html.DropDownListFor(i => i.izin_tur_id, Model.IzinturList, new { @class = "izinTur, form-control", @style = "width:120px;" })
+                    </div>
+                    <div id="mdGoster" style="display:none;">
+                        <br />
+                        <label class="control-label col-sm-5">Mazeret Türü</label>
+                        @Html.DropDownListFor(m => m.tbl_mazeret_turu.mazeret_id, (List<SelectListItem>)ViewBag.mzr, new { @class = "form-control", @style = "width:150px;" })
+                    </div>
+                    <br />
+                    <div>
+                        <label class="control-label col-sm-5">İzin Başlama Tarihi</label>
+                        <input style="width:150px;" type="date" class="izBasTar form-control" name="izin_baslama_tarihi" />
+                    </div>
+                    <br />
+                    <div>
+                        <label class="control-label col-sm-5">İzin Bitiş Tarihi</label>
+                        <input style="width:150px;" type="date" class="izBitTar form-control" name="izin_bitis_tarihi" />
+                    </div>
+                    <br />
+                    <div id="yGoster">
+                        <div>
+                            <label class="control-label col-sm-5">İşe Giriş Tarihi</label>
+                            <label class="control-label"> @ViewBag.iBasT</label>
+                        </div>
+                        <br />
+                        <div>
+                            <label class="control-label col-sm-5">Toplam Çalışma Süresi (Yıl)</label>
+                            <input readonly class="cSure form-control-static" name="calisilan_sure"  value="" style="color:red; font-weight:bold; border:none;" />
+                        </div>
+                        <br />
+                        <div>
+                            <label class="control-label col-sm-5">Tahakkuk Eden Yıllık İzin</label>
+                            <input name="tahakkuk_eden_yillik_izin" class="tahEdenYI form-control" value="" readonly="readonly" style="width:100px;" />
+                        </div>
+                        <br />
+                        <div>
+                            <label class="control-label col-sm-5">İzin Süresi</label>
+                            <input name="kullanilan_yillik_izin" class="yIzinSure form-control col-" id="yIzinSure" value="" readonly="readonly" style="width:100px;" />
+                        </div>
+                        <br />
+                        <div id="renk">
+                            <label class="control-label col-sm-5">Kalan Yıllık İzin</label>
+                            <input name="kalan_yillik_izin" class="kalanYI form-control" value="" id="kalanYI" readonly="readonly" style="width:100px;" />
+                        </div>
+                    </div>
+                    <div id="mGoster" style="display:none;">
+                        <label class="control-label col-sm-5">İzin Süresi</label>
+                        <input name="kullanilan_mazeret_izin" class="mIzinSure form-control has-success" value="" readonly="readonly" style="width:100px;" />
+                    </div>
+                    <br />
+                    <div class="col-sm-offset-7">
+                        <button class="btn btn-info" style="width:100px;">Ekle</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('.izBitTar').change(function () {
+                console.log("KONTROL 1")
+                var izBiT = $(this).val();
+                var izBaT = $(".izBasTar").val();
+                var personelId = @(ViewBag.pId);
+                var izinTurId = $('#izin_tur_id').val();
+                var izinId = "";
+
+                var tahEdenYI = 0;
+                var kalanYI = 0;
+                var yIzinSure = 0;
+                var mIzinSure = 0;
+                var cSure = 0;
+
+                var tbl_izinler = {
+                    izin_id: izinId,
+                    izin_baslama_tarihi: izBaT,
+                    izin_bitis_tarihi: izBiT,
+                    personel_id: personelId,
+                    izin_tur_id: izinTurId
+                };
+
+            $.ajax({
+                url: "@Url.Action("Hesaplama", "IzinGiris")",
+                type: 'POST',
+                dataType: 'json',
+                data: { 'izin': tbl_izinler },
+                success: function (sonuc) {
+                    console.log("KONTROL 4");
+                    tahEdenYI = sonuc.tahEYI;
+                    $(".tahEdenYI").val(tahEdenYI);
+                    yIzinSure = sonuc.yIzinSure;
+                    $(".yIzinSure").val(yIzinSure);
+                    mIzinSure = sonuc.mIzinSure;
+                    $(".mIzinSure").val(mIzinSure);
+                    cSure = sonuc.cSonuc;
+                    $(".cSure").val(cSure);
+
+                    kalanYI = sonuc.kalanYI;
+
+                    var iseGirT = new Date(sonuc.isGirT);
+                    var isGirT = iseGirT.getDate() + "." + (iseGirT.getMonth() + 1) + "." + iseGirT.getFullYear();
+                    $(".isGirT").val(isGirT);
+
+                    $("#renk").addClass('has-error has-feedback');
+                    if (kalanYI < 0) {
+                        negatif();
+                        $(".kalanYI").val(kalanYI);
+                    }
+                    if (kalanYI > 0) {
+                        $(".kalanYI").val(kalanYI);
+                    }
+                },
+                error: function (errormessage) {
+
+                }
+            });
+        });
+
+        function negatif() {
+            document.getElementById("kalanYI").style.color = "red";
+            $("#renk").addClass('has-error has-feedback');
+            $("#yGoster").addClass('has-success has-feedback');
+        }
+
+        $('#izin_tur_id').change(function () {
+            var tur = $(this).val();
+            if (tur == 2) {
+                $("#mdGoster").show();
+                $("#mGoster").show();
+                $("#yGoster").hide();
+            }
+            else if (tur == 1)
+            {
+                $("#mdGoster").hide();
+                $("#mGoster").hide();
+                $("#yGoster").show();
+            }
+        });
+    });
+</script>

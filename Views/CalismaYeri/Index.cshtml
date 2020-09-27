@@ -1,0 +1,94 @@
+﻿@using Personel.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<tbl_calisma_yeri>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="container" style="width:1000px">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h4>Çalışma Yeri Listesi</h4></div>
+            <div class="panel-body">
+                <a href="#" class="btn btn-primary ekle" data-target="@Url.Action("ComboboxGetir", "CalısmaYeri")">Yeni Çalışma Yeri</a>
+                <table style="margin-top:15px;" class="table table-bordered">
+                    <tr class="warning">
+                        <th style="width:325px;">Çalışma Yeri</th>
+                        <th style="width:325px;">Bölge</th>
+                        <th style="width:200px;">Firma Adı</th>
+                        <th style="width:75px;">Düzenleme</th>
+                        <th style="width:75px;">Güncelleme</th>
+                    </tr>
+                    <tbody>
+                        @*@foreach (var per in Model)
+                        {
+                            <tr>
+                                <td hidden>@per.personel_id</td>
+                                <td style="text-align:center;">@per.personel_kodu</td>
+                                <td>@per.personel_adi</td>
+                                <td>@per.personel_soyadi</td>
+                                <td>@per.tbl_firmalar.firma_adi</td>
+                                <td>@per.tbl_sgk_kayit_yeri.sgk_kayit_yeri_adi</td>
+                                <td style="text-align:center;">@per.ise_giris_tarihi.ToString("dd.MM.yyyy")</td>
+                                <td style="text-align:center;">@per.isten_cikis_tarihi</td>
+                                <td style="width:25px"><a href="@Url.Action("Index", "PersonelOzluk")/@per.personel_id" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="bottom" title="Özlük Bilgileri"><i class="glyphicon glyphicon-th-list"></i></a></td>
+                                <td style="width:25px"><a href="@Url.Action("Index", "IzinGiris")/@per.personel_id" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="bottom" title="İzin Bilgileri"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td style="width:25px"><a href="#" class="btn btn-xs btn-success guncelle" data-target="@Url.Action("PersonelGetir", "PersonelGiris")/@per.personel_id"><i class="glyphicon glyphicon-refresh" data-toggle="tooltip" data-placement="bottom" title="Güncelle"></i></a></td>
+                            </tr>
+                        }*@
+                    </tbody>
+                </table>
+                @*@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))*@
+
+                @*<div class="container">
+                         Modal
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">İzin Listesi</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-success" style="width:100px;">Ekle</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+
+                <div class="container">
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModalG" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModalE" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

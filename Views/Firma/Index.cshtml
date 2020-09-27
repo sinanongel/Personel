@@ -1,0 +1,69 @@
+﻿@using Personel.Models.Entity
+@model List<tbl_firmalar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Firma Listesi</h2>
+<br />
+<table style="margin-top:15px;" class="table table-bordered">
+    <tr>
+        <th>FİRMA ID</th>
+        <th>FİRMA ADI</th>
+        <th>FİRMA ÜNVANI</th>
+        <th style="width:auto"></th>
+    </tr>
+    <tbody>
+        @foreach (var frm in Model)
+        {
+        <tr>
+            <td>@frm.firma_id</td>
+            <td>@frm.firma_adi</td>
+            <td>@frm.firma_unvani</td>
+            <td><a href="@Url.Action("FirmaGetir","Firma")/@frm.firma_id" class="btn btn-success" style="width:100px">Güncelle</a></td>
+            @*<td><a href="/FIRMALAR/SIL/@frm.firma_id" class="btn btn-danger">SİL</a></td>*@
+        </tr>
+        }
+    </tbody>
+</table>
+<a href="@Url.Action("FirmaEkle","Firma")" class="btn btn-primary" style="width:100px">Firma Ekle</a>
+
+@*<div class="container">
+     Trigger the modal with a button 
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Firma Ekle</button>
+
+     Modal 
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+             Modal content
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Firma Ekleme</h4>
+                </div>
+                <form>
+                    <div class="modal-body">
+
+                        <div>
+                            <label>Firma Adı</label>
+                            @Html.TextBoxFor(f=>f.firma_adi, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(f=>f.firma_adi, "", ne)
+                            <br />
+                            <label>Firma Ünvanı</label>
+                            <input type="text" class="form-control" name="firma_unvani" />
+                            <br />
+                            <button class="btn btn-info">EKLE</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</div>*@
+
+

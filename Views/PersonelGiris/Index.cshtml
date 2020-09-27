@@ -1,0 +1,164 @@
+﻿@using Personel.Models.Entity
+@using PagedList
+@using PagedList.Mvc  
+@model PagedList.IPagedList<tbl_personel>
+@*@model List<tbl_personel>*@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="container">
+    <div class="panel-group">
+         <div class="panel panel-primary">
+            <div class="panel-heading"><h4>Personel Listesi</h4></div>
+            <div class="panel-body">
+                @*@using(Html.BeginForm("Index", "PersonelGiris", FormMethod.Get))
+                {
+                    <p>
+                        Aranacak Personel : @Html.TextBox("p")
+                        <input type="submit" value="Ara" />
+                    </p>
+                }*@
+                <a href="#" class="btn btn-primary ekle" data-target="@Url.Action("ComboboxGetir", "PersonelGiris")">Yeni Personel</a>
+                <table style="margin-top:15px;" class="table table-bordered">
+                    <tr class="warning">
+                        @*<th style="width:70px;">Personel Id</th>*@
+                        <th style="width:70px;">Personel Kodu</th>
+                        <th style="width:200px;">Adı</th>
+                        <th style="width:200px;">Soyadı</th>
+                        <th style="width:100px;">Firma Adı</th>
+                        @*<th style="width:200px;">Sgk Kayıt Yeri</th>*@
+                        <th style="width:120px;">İşe Girişi Tarihi</th>
+                        <th style="width:120px;">İşten Çıkış Tarihi</th>
+                        @*<th style="width:50px"></th>*@
+                    </tr>
+                    <tbody>
+                        @foreach (var per in Model)
+                        {
+                            <tr>
+                                <td hidden>@per.personel_id</td>
+                                <td style="text-align:center;">@per.personel_kodu</td>
+                                <td>@per.personel_adi</td>
+                                <td>@per.personel_soyadi</td>
+                                <td>@per.tbl_firmalar.firma_adi</td>
+                                @* <td>@per.tbl_sgk_kayit_yeri.sgk_kayit_yeri_adi</td>*@
+                                <td style="text-align:center;">@per.ise_giris_tarihi.ToString("dd.MM.yyyy")</td>
+                                <td style="text-align:center;">@per.isten_cikis_tarihi</td>
+                                <td style="width:25px" ><a href="@Url.Action("Index", "PersonelOzluk")/@per.personel_id" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="bottom" title="Özlük Bilgileri"><i class="glyphicon glyphicon-th-list"></i></a></td>
+                                <td style="width:25px" ><a href="@Url.Action("Index", "IzinGiris")/@per.personel_id" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="bottom" title="İzin Bilgileri"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td style="width:25px" ><a href="#" class="btn btn-xs btn-success guncelle" data-target="@Url.Action("PersonelGetir", "PersonelGiris")/@per.personel_id"><i class="glyphicon glyphicon-refresh" data-toggle="tooltip" data-placement="bottom" title="Güncelle"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+
+                @*<div class="container">
+             Modal
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">İzin Listesi</h4>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" style="width:100px;">Ekle</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+                <div class="container">
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModalG" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModalE" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @*<script type="text/javascript">
+        $(function () {
+            $("body").on("click", ".detay", function () {
+                var url = $(this).data("target");
+                $.post(url, function (data) { })
+                    .done(function (data) {
+                        $("#myModal .modal-body").html(data);
+                        $("#myModal").modal("show");
+                    })
+                    .fail(function () {
+                        $("#myModal .modal-body").text("Hata!!");
+                        $("#myModal").modal("show");
+                    })
+            });
+        });
+
+    </script>*@
+
+    <script type="text/javascript">
+        $(function () {
+            $("body").on("click", ".guncelle", function () {
+                var url = $(this).data("target");
+                $.post(url, function (data) { })
+                    .done(function (data) {
+                        $("#myModalG .modal-body").html(data);
+                        $("#myModalG").modal("show");
+                    })
+                    .fail(function () {
+                        $("#myModalG .modal-body").text("Hata!!");
+                        $("#myModalG").modal("show");
+                    })
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("body").on("click", ".ekle", function () {
+                var url = $(this).data("target");
+                $.post(url, function (data) { })
+                    .done(function (data) {
+                        $("#myModalE .modal-body").html(data);
+                        $("#myModalE").modal("show");
+                    })
+                    .fail(function () {
+                        $("#myModalE .modal-body").text("Hata!!");
+                        $("#myModalE").modal("show");
+                    })
+            });
+        });
+
+    </script>
+}
+

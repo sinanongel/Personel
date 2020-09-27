@@ -1,0 +1,27 @@
+﻿@model Personel.Models.Entity.tbl_sgk_kayit_yeri
+
+<div class="container" style="margin-top:15px; width:570px;">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h4>SGK Kayıt Yeri Girişi</h4></div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="/SgkKayitYeri/SgkKayitYeriEkle" method="post">
+                    <div>
+                        <label class="control-label col-sm-5">SGK Kayıt Yeri Adı</label>
+                        <input style="width:200px;" type="text" class="form-control" name="sgk_kayit_yeri_adi" required="" maxlength="50" />
+                    </div>
+                    <br />
+                    <div>
+                        <label class="control-label col-sm-5">Firma Seçiniz</label>
+                        @Html.DropDownListFor(f => f.tbl_firmalar.firma_id, (List<SelectListItem>)ViewBag.sgk, new { @class = "form-control", @style = "width:200px;" })
+                    </div>
+                    <br />
+                    <div class="col-sm-offset-7">
+                        <button class="btn btn-info" style="width:100px;">Ekle</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

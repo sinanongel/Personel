@@ -1,0 +1,27 @@
+﻿@model Personel.Models.Entity.tbl_bolgeler
+@{
+    ViewBag.Title = "BolgeGetir";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Bölge Bilgileri</h2>
+<br />
+
+@using (Html.BeginForm("BolgeGuncelle", "Bolge", FormMethod.Post))
+{
+    <div class="form-inline">
+        @Html.LabelFor(b => b.bolge_id, "BÖLGE ID", new { @class = "col-sm-2" })
+        @Html.TextBoxFor(b => b.bolge_id, new { @class = "form-control", @style = "width:100px;" })
+        <br /><br />
+        @Html.LabelFor(b => b.bolge_adi, "BÖLGE ADI", new { @class = "col-sm-2" })
+        @Html.TextBoxFor(b => b.bolge_adi, new { @class = "form-control", @style = "width:250px;" })
+        <br /><br />
+        @Html.LabelFor(b => b.firma_id, "FİRMA ADI", new { @class = "col-sm-2" })
+        @Html.DropDownListFor(f => f.tbl_firmalar.firma_id, (List<SelectListItem>)ViewBag.blg, new { @class = "form-control", @style = "width:200px;" })
+    </div>
+    <br />
+    <div class="col-sm-2" style="margin-top:10px;">
+        <button class="btn btn-success" style="width:100px;">Güncelle</button>
+    </div>
+}
+

@@ -1,0 +1,69 @@
+﻿@model Personel.Models.Entity.tbl_personel
+
+<div class="container" style="margin-top:15px; width:570px;">
+    <div class="panel-group">
+        <div class="panel panel-success">
+            <div class="panel-heading"><h4>Personel Güncelleme</h4></div>
+            <div class="panel-body">
+                @using (Html.BeginForm("PersonelGuncelle", "PersonelGiris", FormMethod.Post))
+                {
+                    <div class="form-horizontal">
+                        @Html.LabelFor(p => p.personel_id, "Personel Id", new { @class = "control-label col-sm-5", @style = "color:red; " })
+                        @Html.TextBoxFor(p => p.personel_id, new { @readonly = true, @class = "form-control-static", @style = "color:red; font-weight:bold; border:none" })
+                        <br />
+                        @Html.LabelFor(p => p.personel_kodu, "Personel Kodu", new { @class = "control-label col-sm-5" })
+                        @Html.TextBoxFor(p => p.personel_kodu, new { @class = "form-control", @style = "width:75px;" })
+                        <br />
+                        @Html.LabelFor(p => p.personel_adi, "Personel Adı", new { @class = "control-label col-sm-5" })
+                        @Html.TextBoxFor(p => p.personel_adi, new { @class = "form-control", @style = "width:200px;" })
+                        <br />
+                        @Html.LabelFor(p => p.personel_soyadi, "Personel Soyadı", new { @class = "control-label col-sm-5" })
+                        @Html.TextBoxFor(p => p.personel_soyadi, new { @class = "form-control", @style = "width:200px;" })
+                        <br />
+                        @Html.LabelFor(p => p.firma_id, "Firma", new { @class = "control-label col-sm-5" })
+                        @Html.DropDownListFor(p => p.firma_id, (List<SelectListItem>)ViewBag.frm, new { @class = "form-control", @style = "width:200px;" })
+                        @*<br />
+                        @Html.LabelFor(p => p.sgk_kayit_yeri_id, "SGK Kayıt Yeri", new { @class = "control-label col-sm-5" })
+                        @Html.DropDownListFor(p => p.sgk_kayit_yeri_id, (List<SelectListItem>)ViewBag.sgk, new { @class = "form-control", @style = "width:200px;" })*@
+                        <br />
+                        @Html.LabelFor(p => p.ise_giris_tarihi, "İşe Giriş Tarihi", new { @class = "control-label col-sm-5" })
+                        @Html.TextBoxFor(p => p.ise_giris_tarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", @style = "width:150px;" })
+                        <br />
+                        @Html.LabelFor(p => p.isten_cikis_tarihi, "İşten Çıkış Tarihi", new { @class = "control-label col-sm-5" })
+                        @Html.TextBoxFor(p => p.isten_cikis_tarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", @style = "width:150px;" })
+                    </div>
+                    <br />
+                    <div class="col-sm-offset-7" style="margin-top:10px;">
+                        <button class="btn btn-success" style="width:100px;">Güncelle</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@section scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#firma_id').change(function () {
+                var id = $(this).val();
+                var sgkKayitList = $("#sgk_kayit_yeri_id");
+                sgkKayitList.empty();
+                $.ajax({
+                    url: '/PersonelGiris/SgkKayitYeriList',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { 'id': id },
+                    success: function (data) {
+                        $.each(data, function (index, option) {
+                            sgkKayitList.append('<option value=' + option.Value + ' > ' + option.Text + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}*@
+

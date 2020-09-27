@@ -1,0 +1,166 @@
+﻿@model Personel.Models.Entity.tbl_izinler
+
+<div class="container" style="margin-top:15px; width:570px;">
+    <div class="panel-group">
+        <div class="panel panel-success">
+            <div class="panel-heading"><h4>İzin Güncelleme</h4></div>
+            <div class="panel-body">
+                @using (Html.BeginForm("IzinGuncelle", "IzinGiris", FormMethod.Post))
+                {
+                    <div class="form-horizontal">
+                        <div hidden>
+                            @Html.LabelFor(i => i.izin_id, "İzin Id", new { @class = "control-label col-sm-5", @style = "color:red; " })
+                            @Html.TextBoxFor(i => i.izin_id, new { @readonly = true, @class = "form-control-static", @style = "color:red; font-weight:bold; border:none" })
+                            @Html.LabelFor(i => i.personel_id, "Personel Id", new { @class = "control-label col-sm-5", @style = "color:red; " })
+                            @Html.TextBoxFor(i => i.personel_id, new { @readonly = true, @class = "form-control-static", @style = "color:red; font-weight:bold; border:none" })
+                        </div>
+                        <div style="color:red;">
+                            <label class="control-label col-sm-5">Personel</label>
+                            <label class="control-label"> @ViewBag.pKodu - @ViewBag.pAdi @ViewBag.pSoyadi</label>
+                        </div>
+                        <br />
+                        @Html.LabelFor(i => i.izin_tur_id, "İzin Türü", new { @class = "control-label col-sm-5" })
+                        @Html.DropDownListFor(i => i.izin_tur_id, (List<SelectListItem>)ViewBag.itl, new { @class = "form-control", @style = "width:120px;" })
+                        <div id="mdGoster">
+                            <br />
+                            @Html.LabelFor(i => i.mazeret_id, "Mazeret Türü", new { @class = "control-label col-sm-5" })
+                            @Html.DropDownListFor(i => i.mazeret_id, (List<SelectListItem>)ViewBag.mzr, new { @class = "form-control", @style = "width:150px;" })
+                        </div>
+                        <br />
+                        @Html.LabelFor(i => i.izin_baslama_tarihi, "İzin Başlama Tarihi", new { @class = "control-label col-sm-5" })
+                        @Html.TextBoxFor(i => i.izin_baslama_tarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", @style = "width:150px;" })
+                        <br />
+                        @Html.LabelFor(i => i.izin_bitis_tarihi, "İzin Bitiş Tarihi", new { @class = "control-label col-sm-5" })
+                        @Html.TextBoxFor(i => i.izin_bitis_tarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", @style = "width:150px;" })
+                        <br />
+                        <div id="yGoster">
+                            <div>
+                                <label class="control-label col-sm-5">İşe Giriş Tarihi</label>
+                                <label class="control-label"> @ViewBag.iBasT</label>
+                            </div>
+                            <br />
+                            <div>
+                                @Html.LabelFor(i => i.calisilan_sure, "Toplam Çalışma Süresi (Yıl)", new { @class = "control-label col-sm-5" })
+                                @Html.TextBoxFor(i => i.calisilan_sure, new { @readonly = true, @class = "form-control-static", @style = "color:red; font-weight:bold; border:none" })
+                            </div>
+                            <br />
+                            <div>
+                                @Html.LabelFor(i => i.tahakkuk_eden_yillik_izin, "Tahakkuk Eden Yıllık İzin", new { @class = "control-label col-sm-5" })
+                                @Html.TextBoxFor(i => i.tahakkuk_eden_yillik_izin, new { @readonly = true, @class = "form-control", @style = "width:75px;" })
+                            </div>
+                            <br />
+                            <div>
+                                @Html.LabelFor(i => i.kullanilan_yillik_izin, "İzin Süresi", new { @class = "control-label col-sm-5" })
+                                @Html.TextBoxFor(i => i.kullanilan_yillik_izin, new { @readonly = true, @class = "form-control", @style = "width:75px;" })
+                            </div>
+                            <br />
+                            <div id="renk">
+                                @Html.LabelFor(i => i.kalan_yillik_izin, "Kalan Yıllık İzin", new { @class = "control-label col-sm-5" })
+                                @Html.TextBoxFor(i => i.kalan_yillik_izin, new { @readonly = true, @class = "form-control", @style = "width:90px;" })
+                            </div>
+                        </div>
+                        <div id="mGoster">
+                            @Html.LabelFor(i => i.kullanilan_mazeret_izin, "İzin Süresi", new { @class = "control-label col-sm-5" })
+                            @Html.TextBoxFor(i => i.kullanilan_mazeret_izin, new { @readonly = true, @class = "form-control", @style = "width:75px;" })
+                        </div>
+                        <div class="col-sm-offset-7">
+                            <button class="btn btn-success" style="width:100px;">Güncelle</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#izin_bitis_tarihi').change(function () {
+            var izBiT = $(this).val();
+            var izBaT = $("#izin_baslama_tarihi").val();
+            var personelId = @(ViewBag.pId);
+            var izinTurId = $('#izin_tur_id').val();
+            var izinId = $('#izin_id').val();
+            var tahEdenYI = $('#tahakkuk_eden_yillik_izin').val();
+
+            var kalanYI = 0;
+            var yIzinSure = 0;
+            var mIzinSure = 0;
+            var cSure = 0;
+
+            var tbl_izinler = {
+                izin_id: izinId,
+                izin_baslama_tarihi: izBaT,
+                izin_bitis_tarihi: izBiT,
+                personel_id: personelId,
+                izin_tur_id: izinTurId,
+                tahakkuk_eden_yillik_izin: tahEdenYI
+            };
+
+            $.ajax({
+                url: '/IzinGiris/Hesaplama',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'izin': tbl_izinler },
+                success: function (sonuc) {
+                    tahEdenYI = sonuc.tahEYI;
+                    $("#tahakkuk_eden_yillik_izin").val(tahEdenYI);
+                    yIzinSure = sonuc.yIzinSure;
+                    $("#kullanilan_yillik_izin").val(yIzinSure);
+                    mIzinSure = sonuc.mIzinSure;
+                    $("#kullanilan_mazeret_izin").val(mIzinSure);
+                    cSure = sonuc.cSonuc;
+                    $("#calisilan_sure").val(cSure);
+
+                    kalanYI = sonuc.kalanYI;
+
+                    $("#renk").addClass('has-error has-feedback');
+                    if (kalanYI < 0) {
+                        negatif();
+                        $("#kalan_yillik_izin").val(kalanYI);
+                    }
+                    if (kalanYI > 0) {
+                        $("#kalan_yillik_izin").val(kalanYI);
+                    }
+                }
+            });            
+        });
+
+        var izTur = $('#izin_tur_id').val();
+
+        if (izTur == 2) {
+            $("#mdGoster").show();
+            $("#mGoster").show();
+            $("#yGoster").hide();
+        }
+        else if (izTur == 1) {
+            $("#mdGoster").hide();
+            $("#mGoster").hide();
+            $("#yGoster").show();
+        }
+
+        function negatif() {
+            document.getElementById("kalan_yillik_izin").style.color = "red";
+            $("#renk").addClass('has-error has-feedback');
+            $("#yGoster").addClass('has-success has-feedback');
+        }
+    
+
+        $('#izin_tur_id').change(function () {
+            var tur = $(this).val();
+            if (tur == 2) {
+                $("#mdGoster").show();
+                $("#mGoster").show();
+                $("#yGoster").hide();
+            }
+            else if (tur == 1)
+            {
+                $("#mdGoster").hide();
+                $("#mGoster").hide();
+                $("#yGoster").show();
+            }
+        });
+    });
+</script>

@@ -1,0 +1,21 @@
+﻿@model Personel.Models.Entity.tbl_personel_ozluk
+
+<div class="container" style="margin-top:15px; width:570px;">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h4>Özlük Dosya Girişi</h4></div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="/PersonelOzluk/OzlukDosyaEkle" enctype = "multipart/form-data" method="post">
+                    <input style="display:none" value="@ViewBag.pId" name="personel_id"  />
+                    <div>
+                        @Html.DropDownListFor(o => o.tbl_ozluk_belgeler.belge_id, (List<SelectListItem>)ViewBag.bListe, new { @class = "form-control", @style = "width:200px;" })
+                        <br />
+                        <input class="form-control-file" type="file" name="dosya_yolu" />
+                        <br />
+                        <input class="btn btn-info"  type="submit" value="Dosya Yükle" />
+                    </div>
+                </form>
+</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@model Personel.Models.Entity.tbl_firmalar
+@{
+    ViewBag.Title = "FirmaEkle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Firma Ekleme</h2>
+<br />
+<form class="form-inline" method="post">
+    <div>
+        <label class="col-sm-2">Firma Adı</label>
+        <input style="width:200px;" type="text" class="form-control" name="firma_adi" required="" maxlength="50" />
+    </div>
+    <br />
+    <div>
+        <label class="col-sm-2">Firma Ünvanı</label>
+        <input type="text" class="form-control" name="firma_unvani" required="" maxlength="50" />
+    </div>
+    <br />
+    <div  class="col-sm-2" style="margin-top:10px;">
+        <button class="btn btn-info" style="width:100px;">Ekle</button>
+    </div>
+</form>
+
+

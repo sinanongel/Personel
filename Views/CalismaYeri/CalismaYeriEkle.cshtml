@@ -1,0 +1,41 @@
+﻿@model Personel.Models.Entity.tbl_calisma_yeri
+
+<div class="container" style="margin-top:15px; width:570px;">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h4>Yeni Personel Girişi</h4></div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="@Url.Action("CalismaYeriEkle", "CalismaYeri")" method="post">
+                    <div>
+                        <label class="control-label col-sm-5">Çalışma Yeri Adı</label>
+                        <input style="width:200px;" type="text" class="form-control" name="calisma_yeri_adi" required="" maxlength="50" />
+                    </div>
+                    <br />
+                    <div>
+                        <label class="control-label col-sm-5">Firma</label>
+                        @Html.DropDownListFor(f => f.firma_id, (List<SelectListItem>)ViewBag.frm, new { @class = "form-control", @style = "width:200px;" })
+                    </div>
+                    @*<div>
+                            <label class="control-label col-sm-5">SGK Kayıt Yeri</label>
+                            @Html.DropDownListFor(f => f.sgk_kayit_yeri_id, Model.SgkKayitYeriList, new { @class = "form-control", @style = "width:200px;" })
+                        </div>*@
+                    <br />
+                    @*<div>
+                        <label class="control-label col-sm-5">İşe Giriş Tarihi</label>
+                        <input style="width:150px;" type="date" class="form-control" name="ise_giris_tarihi" required="" maxlength="50" />
+                    </div>
+                    <br />
+                    <div>
+                        <label class="control-label col-sm-5">İşten Çıkış Tarihi</label>
+                        <input style="width:150px;" type="date" class="form-control" name="isten_cikis_tarihi" maxlength="50" />
+                    </div>*@
+                    <br />
+                    <div class="col-sm-offset-7" style="margin-top:10px;">
+                        <button class="btn btn-info" style="width:100px;">Ekle</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
